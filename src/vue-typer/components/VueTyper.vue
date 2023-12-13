@@ -157,12 +157,12 @@ export default {
     leftWords() {
       return this.currentText.slice(0, this.currentTextIndex)
         .split(' ')
-        .map((word, index, array) => (index < array.length - 1 ? [...word.split(''), ' '] : word.split('')));
+        .map((word, index, array) => (index < array.length - 1 ? [...word.split(''), ' '] : word.split('')))
     },
     rightWords() {
       return this.currentText.slice(this.currentTextIndex)
         .split(' ')
-        .map((word, index, array) => (index < array.length - 1 ? [...word.split(''), ' '] : word.split('')));
+        .map((word, index, array) => (index < array.length - 1 ? [...word.split(''), ' '] : word.split('')))
     },
     caretClasses() {
       const idle = this.state === STATE.IDLE
