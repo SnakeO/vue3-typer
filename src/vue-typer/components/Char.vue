@@ -22,7 +22,7 @@ export default {
 </script>
 
 <style scoped lang='scss'>
-@import 'typer-colors';
+@import '../styles/typer-colors.scss';
 
 .char {
   display: inline-block;

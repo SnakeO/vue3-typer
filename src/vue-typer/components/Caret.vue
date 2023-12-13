@@ -25,8 +25,8 @@ export default {
 </script>
 
 <style scoped lang='scss'>
-@import 'typer-colors';
-@import 'caret-animations';
+@import '../styles/typer-colors.scss';
+@import '../styles/caret-animations.scss';
 
 span.caret {
   &:empty:before {

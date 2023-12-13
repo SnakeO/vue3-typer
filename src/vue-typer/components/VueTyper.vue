@@ -5,8 +5,8 @@
   Until we can find a solution for this, we just create one span per character.
 span.vue-typer
   span.left
-    char.custom.typed(v-for='l in numLeftChars',
-                      :val="currentTextArray[l-1]")
+    span.word(v-for='word in leftWords', :key='word')
+      char.custom.typed(v-for='char in word', :val='char')
   caret(:class='caretClasses', :animation='caretAnimation')
   span.right
     char.custom(v-for='r in numRightChars',
@@ -15,10 +15,10 @@ span.vue-typer
 </template>
 
 <script>
-import Caret from './Caret'
-import Char from './Char'
-import shallowEquals from '../utils/shallow-equals'
-import shuffle from '../utils/shuffle'
+import Caret from './Caret.vue'
+import Char from './Char.vue'
+import shallowEquals from '../utils/shallow-equals.js'
+import shuffle from '../utils/shuffle.js'
 import split from 'lodash.split'
 
 const STATE = {
@@ -154,6 +154,16 @@ export default {
   },
 
   computed: {
+    leftWords() {
+      return this.currentText.slice(0, this.currentTextIndex)
+        .split(' ')
+        .map((word, index, array) => (index < array.length - 1 ? [...word.split(''), ' '] : word.split('')));
+    },
+    rightWords() {
+      return this.currentText.slice(this.currentTextIndex)
+        .split(' ')
+        .map((word, index, array) => (index < array.length - 1 ? [...word.split(''), ' '] : word.split('')));
+    },
     caretClasses() {
       const idle = this.state === STATE.IDLE
       return {
@@ -410,5 +420,8 @@ span.vue-typer {
   span.left, span.right {
     display: inline;
   }
+}
+span.word {
+  white-space: nowrap;
 }
 </style>
